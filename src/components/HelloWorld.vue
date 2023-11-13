@@ -1,5 +1,10 @@
 <template>
   <div class="hello">
+      <select name="" id="" v-model="sel">
+          <option value="">Все</option>
+          <option value="Мастер ПО">Мастера</option>
+          <option value="Преподаватель">Преподаватели</option>
+      </select>
        <table class="w3-table w3-bordered">
            <tr v-for="t in Teachers" :key="t.id">
                <td>{{ t.fio }}</td>
@@ -15,10 +20,17 @@
 import {store} from '../store'
 export default {
   name: 'HelloWorld',
+  data(){
+    return{
+      sel:''
+    }
+  },
   computed:{
+     
      Teachers(){
-       return store.state.teachers
-     }
+       return store.state.teachers.filter((n)=> { return n.role.match(this.sel)  })
+     },
+     
   }
 }
 </script>
