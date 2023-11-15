@@ -9,7 +9,8 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         zag:[],  // переменные , данные , состояние 
-        teachers:[]
+        teachers:[],
+        g40b:[]
     },
     mutations: {
         ...vuexfireMutations,  // мутации изменяют state если происходят action
@@ -18,21 +19,26 @@ export const store = new Vuex.Store({
         bindZag: firestoreAction(({ bindFirestoreRef }) => {
             return bindFirestoreRef('zag', db.collection('zagadki'))
         }), // 
+        bindGL: firestoreAction(({ bindFirestoreRef }) => {
+            return bindFirestoreRef('g40b', db.collection('g40b'))
+        }), // 
         bindTeachers: firestoreAction(({ bindFirestoreRef }) => {
             return bindFirestoreRef('teachers', db.collection('teachers'))
         }), // 
 
         addUser: firestoreAction((context, payload) => {
-            return db.collection('users').add(payload)
+            return db.collection('g40b').add(payload)
         }),
         saveR: firestoreAction((context, payload) => {
             return db.collection('rezult_zagadki').add(payload)
         }),
         delUser: firestoreAction((context, payload) => {
-            return db.collection('users').doc(payload).delete()
+            db.collection('g40b')
+                .doc(payload)
+                .delete()
         }),
-        updateZag: firestoreAction((context, {id, doc}) => {
-            db.collection('zagadki')
+        updateG: firestoreAction((context, {id, doc}) => {
+            db.collection('g40b')
                 .doc(id)
                 .update(doc)
         }),
@@ -55,4 +61,5 @@ export const store = new Vuex.Store({
 
 
 store.dispatch('bindZag')
+store.dispatch('bindGL')
 store.dispatch('bindTeachers')

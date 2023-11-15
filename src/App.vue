@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <HW></HW>
-    <hr>
-     <UV></UV>
+     <GL></GL>
     
   </div>
 </template>
@@ -10,13 +8,15 @@
 <script>
 
 
-import UV from './components/UslovView.vue'
-import HW from './components/HelloWorld.vue'
+// import UV from './components/UslovView.vue'
+// import HW from './components/HelloWorld.vue'
+import GL from './components/GL.vue'
 
 export default {
   name: 'App',
   components:{
-    UV,HW
+    // UV,HW,
+    GL
   },
   data(){
     return {
